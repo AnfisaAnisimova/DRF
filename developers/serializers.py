@@ -5,4 +5,4 @@ from .models import Developer
 class DeveloperModelSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Developer
-        fields = '__all__'
+        fields = "__all__"

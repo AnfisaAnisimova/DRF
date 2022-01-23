@@ -7,18 +7,17 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Developer',
+            name="Developer",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('username', models.CharField(max_length=64, unique=True, verbose_name='Никнейм')),
-                ('first_name', models.CharField(max_length=64, verbose_name='Имя')),
-                ('last_name', models.CharField(max_length=64, verbose_name='Фамилия')),
-                ('email', models.EmailField(max_length=254, unique=True, verbose_name='электронная почта')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("username", models.CharField(max_length=64, unique=True, verbose_name="Никнейм")),
+                ("first_name", models.CharField(max_length=64, verbose_name="Имя")),
+                ("last_name", models.CharField(max_length=64, verbose_name="Фамилия")),
+                ("email", models.EmailField(max_length=254, unique=True, verbose_name="электронная почта")),
             ],
-        ),
+        )
     ]
