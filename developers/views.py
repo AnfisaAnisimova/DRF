@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from rest_framework.viewsets import ModelViewSet
+from .models import Developer
+from .serializers import DeveloperModelSerializer
 
-# Create your views here.
+
+class DeveloperModelViewSet(ModelViewSet):
+    queryset = Developer.objects.all()
+    serializer_class = DeveloperModelSerializer
