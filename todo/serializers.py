@@ -11,4 +11,5 @@ class ProjectSerializer(serializers.HyperlinkedModelSerializer):
 class ToDoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = ToDo
-        exclude = ["active"]
+        # exclude = ["active"]
+        fields = "__all__"
