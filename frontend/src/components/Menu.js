@@ -1,17 +1,17 @@
 import React from 'react'
+import {Link} from "react-router-dom";
 
 const Menu = () => {
     return (
-        <div className="top">
-            <div className="container">
-                <ul className="header">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Developers</a></li>
-                    <li><a href="#">Managers</a></li>
-                    <li><a href="#">List of projects</a></li>
-                </ul>
-            </div>
+        <div class="container-fluid">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li className="nav-item"><Link class="nav-link" to='/home'>Home</Link></li>
+                <li class="nav-item"><Link class="nav-link" to='/developers'>Developers</Link></li>
+                <li class="nav-item"><Link class="nav-link" to='/projects'>Projects</Link></li>
+                <li class="nav-item"><Link class="nav-link" to='/tasks'>ToDo</Link></li>
+            </ul>
         </div>
+
     );
 };
 

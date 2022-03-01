@@ -2,13 +2,13 @@ import React from "react";
 
 const Footer = () => {
     return (
-        <footer>
-            <div className="footer">
-                <div className="container">
-                    <h3 className="heading footer__heading">Training project for Django REST course</h3>
+        <footer class="footer mt-auto py-3 bg-light">
+            <div class="container">
+                <div>
+                    <h4>Training project for Django REST course</h4>
                     <hr/>
                 </div>
-                <div className="container">
+                <div>
                     <div className="footer__bottom">
                         <ul className="footer__info">
                             <li className="footer__list">+79533521634</li>

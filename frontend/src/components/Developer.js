@@ -23,19 +23,17 @@ const DeveloperItem = ({developer}) => {
 const DeveloperList = ({developers}) => {
    return (
        <table>
-           <th>
-               First name
-           </th>
-           <th>
-               Last Name
-           </th>
-           <th>
-               Username
-           </th>
-           <th>
-               Email
-           </th>
+           <thead>
+           <tr>
+               <th>First name</th>
+               <th>Last Name</th>
+               <th>Username</th>
+               <th>Email</th>
+           </tr>
+           </thead>
+           <tbody>
            {developers.map((developer) => <DeveloperItem developer={developer} />)}
+           </tbody>
        </table>
    )
 }
