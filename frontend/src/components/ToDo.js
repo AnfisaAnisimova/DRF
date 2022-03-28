@@ -23,10 +23,10 @@ const TodoItem = ({todo}) => {
                {status}
            </td>
            <td>
-               {todo.project}
+               {todo.project.name}
            </td>
            <td>
-               {todo.creator}
+               {todo.creator.first_name} {todo.creator.last_name}
            </td>
        </tr>
    )
