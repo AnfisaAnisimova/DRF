@@ -5,7 +5,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from .filters import ToDoFilter
 from .models import Project, ToDo
-from .serializers import ProjectSerializer, ToDoSerializer
+from .serializers import ProjectSerializer, ToDoSerializer, ToDoSerializerBase
 
 
 class ProjectPagination(PageNumberPagination):
@@ -30,7 +30,7 @@ class ProjectModelViewSet(ModelViewSet):
 
 
 class ToDoModelViewSet(ModelViewSet):
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
     queryset = ToDo.objects.all()
     serializer_class = ToDoSerializer
     pagination_class = ToDoPagination
@@ -45,3 +45,9 @@ class ToDoModelViewSet(ModelViewSet):
             return Response(status=status.HTTP_404_NOT_FOUND)
         else:
             return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def get_serializer_class(self):
+        if self.request.method in ['GET']:
+            return ToDoSerializer
+        return ToDoSerializerBase
+
