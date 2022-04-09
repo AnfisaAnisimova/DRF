@@ -79,7 +79,8 @@ class TestToDoViewSet(APITestCase):
         """
         developer = Developer.objects.create(username='WhoAmI', first_name='Alex', last_name='Petrov',
                                              email='whoami@gmail.com')
-        project = Project.objects.create(name='Project 1', developers=developer)
+        project = Project.objects.create(name='Project 1')
+        project.developers.add(developer)
         todo = ToDo.objects.create(project=project, text='Some text', creator=developer)
         admin = User.objects.create_superuser('admin', 'admin@admin.com', 'admin123456')
         self.client.login(username='admin', password='admin123456')
