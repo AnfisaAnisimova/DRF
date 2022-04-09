@@ -74,8 +74,7 @@ class TestToDoViewSet(APITestCase):
 
     def test_edit_admin(self):
         """
-        Данный тест выдаёт ошибку. Думаю проблема в строке где создаётся объект project т.к. в модели
-        поле developers имеет отношение многие ко многим. Не понимаю как это прописать при создании объекта
+        Теперь статус-код тоже возвращается 400 вместо 200
         """
         developer = Developer.objects.create(username='WhoAmI', first_name='Alex', last_name='Petrov',
                                              email='whoami@gmail.com')

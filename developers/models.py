@@ -8,3 +8,5 @@ class Developer(models.Model):
     first_name = models.CharField(max_length=64, verbose_name="Имя")
     last_name = models.CharField(max_length=64, verbose_name="Фамилия")
     email = models.EmailField(max_length=254, verbose_name="электронная почта", unique=True)
+    is_superuser = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=True)
