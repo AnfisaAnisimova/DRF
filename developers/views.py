@@ -4,6 +4,7 @@ from .models import Developer
 from .serializers import DeveloperModelSerializer
 
 
-class DeveloperModelViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, GenericViewSet):
+class DeveloperModelViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
+                            mixins.CreateModelMixin, GenericViewSet):
     queryset = Developer.objects.all()
     serializer_class = DeveloperModelSerializer

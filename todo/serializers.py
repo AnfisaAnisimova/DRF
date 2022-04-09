@@ -10,9 +10,16 @@ class ProjectSerializer(serializers.HyperlinkedModelSerializer):
         fields = "__all__"
 
 
+class ToDoSerializerBase(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = ToDo
+        fields = "__all__"
+
+
 class ToDoSerializer(serializers.HyperlinkedModelSerializer):
     project = ProjectSerializer()
     creator = DeveloperModelSerializer()
+
     class Meta:
         model = ToDo
         # exclude = ["active"]
