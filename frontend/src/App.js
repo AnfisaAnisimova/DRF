@@ -6,11 +6,13 @@ import Menu from './components/Menu';
 import Footer from './components/Footer';
 import ProjectList from './components/Projects';
 import TodoList from './components/ToDo';
-import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Link, Route, Routes} from 'react-router-dom';
 import Home from "./components/Home";
 import './bootstrap/css/bootstrap.css';
 import Cookies from 'universal-cookie';
 import LoginForm from "./components/Auth";
+import ProjectForm from "./components/ProjectForm";
+import ToDoForm from "./components/ToDoForm";
 
 const NotFound404 = ({location}) => {
     return (
@@ -70,6 +72,47 @@ class App extends React.Component {
        return headers
    }
 
+   deleteProject(url) {
+       const headers = this.get_headers()
+       axios.delete(`${url}`, {headers})
+           .then(response => {
+               this.setState({projects: this.state.filter((item) => item.url !== url)})
+           }).catch(error => console.log(error))
+   }
+
+   deleteToDo(url) {
+       const headers = this.get_headers()
+       axios.delete(`${url}`, {headers})
+           .then(response => {
+                this.setState({todos: this.state.todos})
+            }).catch(error => console.log(error))
+   }
+
+   createProject(name, repo, developers) {
+        const headers = this.get_headers()
+        const data = {name: name, repo: repo, developers: developers}
+       console.log(data)
+        axios.post(`http://127.0.0.1:8000/api/projects/`, data, {headers: headers})
+            .then(response => {
+                let new_project = response.data
+                new_project.developers = this.state.developers.filter((item) => item.url === new_project.developers)[0]
+                this.setState({projects: [...this.state.projects, new_project]})
+            }).catch(error => console.log(error))
+   }
+
+   createToDo(text, project, creator) {
+        const headers = this.get_headers()
+        const data = {text: text, project: project, creator: creator}
+       console.log(data)
+        axios.post(`http://127.0.0.1:8000/api/tasks/`, data, {headers: headers})
+            .then(response => {
+                let new_todo = response.data
+                new_todo.project = this.state.project.filter((item) => item.id === new_todo.project)[0]
+                new_todo.creator = this.state.creator.filter((item) => item.url === new_todo.creator)[0]
+                this.setState({todos: [...this.state.todos, new_todo]})
+            }).catch(error => console.log(error))
+    }
+
    load_data() {
 
        const headers = this.get_headers()
@@ -125,8 +168,10 @@ class App extends React.Component {
                    <div>
                        <Routes>
                            <Route path='/developers' element={<DeveloperList developers={this.state.developers}/>}/>} />
-                           <Route path='/projects' element={<ProjectList projects={this.state.projects}/>}/>} />
-                           <Route path='/tasks' element={<TodoList todos={this.state.todos}/>}/>} />
+                           <Route path='/projects' element={<ProjectList projects={this.state.projects} deleteProject={(url) => this.deleteProject(url)}/>}/>
+                           <Route path='/projects/create' element={<ProjectForm all_developers={this.state.developers} createProject={(name, repo, developers) => this.createProject(name, repo, developers)}/>}/>
+                           <Route path='/tasks' element={<TodoList todos={this.state.todos} deleteToDo={(url) => this.deleteToDo(url)}/>}/>
+                           <Route path='/tasks/create' element={<ToDoForm projects={this.state.projects} developers={this.state.developers} createToDo={(text, project, creator) => this.createToDo (text, project, creator)} />}  />
                            <Route path='/home' element={<Home/>}/>}/>} />
                            <Route path='/login' element={<LoginForm get_token={(username, password) => this.get_token(username, password)}/>}/>
                            <Route component={NotFound404} />
